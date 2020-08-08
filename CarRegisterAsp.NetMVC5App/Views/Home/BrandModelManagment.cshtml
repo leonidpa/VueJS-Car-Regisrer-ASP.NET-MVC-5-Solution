@@ -1,0 +1,63 @@
+﻿
+@{
+    ViewBag.Title = "BrandModelManagment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section css{
+    <link href="~/Content/ng.css" rel="stylesheet" />
+    <link href="~/Content/brand-model.page.css" rel="stylesheet" />
+}
+@section scripts{
+    <script src="~/Scripts/vue.js"></script>
+    <script src="~/ScriptsVue/BrandModelPageApp.js"></script>
+}
+
+<div id="app">
+    <div>
+        <div class="inline" style="margin-right: 100pt;">
+            <div>
+                <h3 class="inline">Brands:</h3>
+                <input class="inline" style="width: 114pt;" type="text" v-model="inputBrand" v-on:input="setBrandSelect()" name="bname" placeholder="" />
+                <div class="inline">
+                    <a v-on:click="addBrand()">
+                        <img title="Add brand" src="~/Content/images/add.png" />
+                    </a>
+                </div>
+                <div class="inline" v-show="brandDeleteVisble">
+                    <a v-on:click="deleteBrand()">
+                        <img title="Delete brand" style="margin-bottom: 2pt;" src="~/Content/images/erase.png" />
+                    </a>
+                </div>
+
+            </div>
+            <select v-model="selectedBrandId" v-on:change="selectBrandChanged()" id="brandsSelectList" class="brand-select-list" size="25">
+                <option v-for="brand in BrandsList" v-bind:value="brand.Id">{{brand.Name}}</option>
+            </select>
+        </div>
+        <div class="inline absolute">
+            <div>
+                <h3 class="inline">Models:</h3>
+                <input class="inline" style="width: 114pt;" type="text" v-model="inputModel" v-on:input="setModelSelect()" :disabled="inputModelDisabled == true" name="mname" placeholder="" />
+                <div class="inline" v-show="!inputModelDisabled">
+                    <a v-on:click="addModel()">
+                        <img class="inline" title="Add model" src="~/Content/images/add.png" />
+                    </a>
+                </div>
+                <div class="inline" v-show="modelDeleteVisible">
+                    <a v-on:click="deleteModel()">
+                        <img title="Delete model" style="margin-bottom: 2pt;" src="~/Content/images/erase.png" />
+                    </a>
+                </div>
+
+            </div>
+            <select v-model="selectedModelId" v-on:change="selectModelChanged()" :disabled="inputModelDisabled == true" id="modelsSelectList" class="brand-select-list" size="25">
+                <option v-for="model in ModelsList" v-bind:value="model.Id">{{model.Name}}</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+
+
+
